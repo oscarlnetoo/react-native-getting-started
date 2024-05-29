@@ -10,14 +10,23 @@ import {
 } from 'react-native';
 
 export const Home = () => {
+  const [newTask, setNewTask] = React.useState('');
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.title}>Hello world!</Text>
-        <TextInput style={styles.input} />
+        <Text style={styles.title}>Hello World!</Text>
+        <TextInput
+          placeholder="New task..."
+          placeholderTextColor="#555"
+          style={styles.input}
+          onChangeText={setNewTask}
+        />
         <TouchableOpacity activeOpacity={0.7} style={styles.button}>
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
+        <Text style={styles.titleTasks}>My Tasks</Text>
+        <Text style={{color: '#fff'}}>{newTask}</Text>
       </View>
     </SafeAreaView>
   );
@@ -38,6 +47,12 @@ const styles = StyleSheet.create({
     color: '#f1f1f1',
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  titleTasks: {
+    color: '#f1f1f1',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginVertical: 50,
   },
   input: {
     backgroundColor: '#29292e',
