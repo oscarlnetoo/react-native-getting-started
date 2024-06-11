@@ -48,13 +48,15 @@ export const Home = () => {
 
         <Text style={styles.titleTasks}>My Tasks</Text>
 
-        <ScrollView>
-          {tasks.map(task => (
-            <TouchableOpacity key={task.id} style={styles.buttonTask}>
-              <Text style={styles.titleTask}>{task.title}</Text>
+        <FlatList
+          data={tasks}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <TouchableOpacity style={styles.buttonTask}>
+              <Text style={styles.titleTask}>{item.title}</Text>
             </TouchableOpacity>
-          ))}
-        </ScrollView>
+          )}
+        />
       </View>
     </SafeAreaView>
   );
