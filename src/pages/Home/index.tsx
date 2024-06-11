@@ -7,6 +7,8 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  ScrollView,
+  FlatList,
 } from 'react-native';
 
 interface Task {
@@ -43,13 +45,16 @@ export const Home = () => {
           onPress={handleAddNewTask}>
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
+
         <Text style={styles.titleTasks}>My Tasks</Text>
 
-        {tasks.map(task => (
-          <TouchableOpacity key={task.id} style={styles.buttonTask}>
-            <Text style={styles.titleTask}>{task.title}</Text>
-          </TouchableOpacity>
-        ))}
+        <ScrollView>
+          {tasks.map(task => (
+            <TouchableOpacity key={task.id} style={styles.buttonTask}>
+              <Text style={styles.titleTask}>{task.title}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
