@@ -15,6 +15,7 @@ export const Home = () => {
   const [newTask, setNewTask] = React.useState('');
 
   const tasks = React.useContext(TasksContext);
+  console.log(tasks);
 
   const handleAddNewTask = () => {
     const data = {
