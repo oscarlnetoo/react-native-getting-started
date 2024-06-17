@@ -44,3 +44,13 @@ export const TasksProvider: React.FunctionComponent = ({children}) => {
     </TasksContext.Provider>
   );
 };
+
+export function useTaskList(): ITasksContext {
+  const context = React.useContext(TasksContext);
+
+  if (!context) {
+    throw new Error('useTaskList must be used with TasksProvider');
+  }
+
+  return context;
+}
