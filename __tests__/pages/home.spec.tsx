@@ -12,13 +12,13 @@ describe('Home page', () => {
     expect(newTaskInput).toBeDefined();
   });
 
-  it('inserts a new task correctly using hook', () => {
+  it('inserts a new task correctly using hook', async () => {
     const {result} = renderHook(() => useTaskList(), {
       wrapper: TasksProvider,
     });
 
-    act(() => {
-      result.current.addTask({id: '1', title: 'task'});
+    await act(async () => {
+      await result.current.addTask({id: '1', title: 'task'});
     });
 
     const actual = result.current.tasks;
@@ -44,6 +44,6 @@ describe('Home page', () => {
     const actual = result.current.tasks;
 
     expect(actual).toBeTruthy();
-    //expect(actual.length).toEqual(1);
+    expect(actual.length).toEqual(1);
   });
 });
