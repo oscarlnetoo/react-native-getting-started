@@ -8,6 +8,7 @@ import {
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
+import { SignIn } from './src/pages/SignIn';
 
 const App: React.FunctionComponent = () => {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
@@ -18,7 +19,7 @@ const App: React.FunctionComponent = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <SignIn />
     </ThemeProvider>
   );
 };
