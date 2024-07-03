@@ -8,7 +8,7 @@ const Open = createNativeStackNavigator();
 export const OpenRoutes: React.FunctionComponent = () => {
   return (
     <Open.Navigator
-      initialRouteName="SignIn"
+      initialRouteName="SignUp"
       screenOptions={{ headerShown: false }}
     >
       <Open.Screen name="SignIn" component={SignIn} />
