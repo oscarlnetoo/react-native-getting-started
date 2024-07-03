@@ -14,8 +14,15 @@ import {
 } from './styles';
 import { Button } from '../../components/Form/Button';
 import logo from '../../assets/logo.png';
+import { useNavigation } from '@react-navigation/native';
+
+interface ScreenNavigationProps {
+  navigate: (screen: string) => void;
+}
 
 export const SignIn: React.FunctionComponent = () => {
+  const { navigate } = useNavigation<ScreenNavigationProps>();
+
   return (
     <>
       <ScrollView
@@ -35,7 +42,7 @@ export const SignIn: React.FunctionComponent = () => {
           </Content>
         </Container>
       </ScrollView>
-      <CreateAccountButton>
+      <CreateAccountButton onPress={() => navigate('SignUp')}>
         <Icon name="log-in" />
         <CreateAccountTitle>Create an account</CreateAccountTitle>
       </CreateAccountButton>

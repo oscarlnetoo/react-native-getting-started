@@ -12,8 +12,15 @@ import {
 } from './styles';
 import { Button } from '../../components/Form/Button';
 import logo from '../../assets/logo.png';
+import { useNavigation } from '@react-navigation/native';
+
+interface ScreenNavigationProps {
+  goBack: () => void;
+}
 
 export const SignUp: React.FunctionComponent = () => {
+  const { goBack } = useNavigation<ScreenNavigationProps>();
+
   return (
     <>
       <ScrollView
@@ -31,7 +38,7 @@ export const SignUp: React.FunctionComponent = () => {
           </Content>
         </Container>
       </ScrollView>
-      <BackToSignInButton>
+      <BackToSignInButton onPress={() => goBack()}>
         <Icon name="arrow-left" />
         <BackToSignInTitle>Back to login</BackToSignInTitle>
       </BackToSignInButton>
