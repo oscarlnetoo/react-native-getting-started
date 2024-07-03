@@ -26,3 +26,13 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.light};
   margin-bottom: 24px;
 `;
+
+export const ForgotPasswordButton = styled.TouchableOpacity`
+  margin-top: 24px;
+`;
+
+export const ForgotPasswordTitle = styled.Text`
+  font-size: ${RFValue(14)}px;
+  font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.gray500};
+`;
