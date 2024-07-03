@@ -1,5 +1,4 @@
 import React from 'react';
-import { Home } from './src/pages/Home';
 import { ThemeProvider } from 'styled-components';
 import theme from './src/global/styles/theme';
 import {
@@ -8,8 +7,8 @@ import {
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
-import { SignIn } from './src/pages/SignIn';
-import { SignUp } from './src/pages/SignUp';
+import { NavigationContainer } from '@react-navigation/native';
+import { Routes } from './src/routes';
 
 const App: React.FunctionComponent = () => {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
@@ -19,9 +18,11 @@ const App: React.FunctionComponent = () => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <SignUp />
-    </ThemeProvider>
+    <NavigationContainer>
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
+    </NavigationContainer>
   );
 };
 
