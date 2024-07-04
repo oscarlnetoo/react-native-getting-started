@@ -1,6 +1,5 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { Input } from '../../components/Form/Input';
 import {
   BackToSignInButton,
   BackToSignInTitle,
@@ -13,13 +12,29 @@ import {
 import { Button } from '../../components/Form/Button';
 import logo from '../../assets/logo.png';
 import { useNavigation } from '@react-navigation/native';
+import { InputControl } from '../../components/Form/InputControl';
+import { useForm } from 'react-hook-form';
 
 interface ScreenNavigationProps {
   goBack: () => void;
 }
 
+interface IFormInputs {
+  [name: string]: any;
+}
+
 export const SignUp: React.FunctionComponent = () => {
   const { goBack } = useNavigation<ScreenNavigationProps>();
+  const { control, handleSubmit } = useForm();
+
+  const handleSignIn = (form: IFormInputs) => {
+    const data = {
+      email: form.email,
+      password: form.password,
+    };
+
+    console.log(data);
+  };
 
   return (
     <>
@@ -31,10 +46,32 @@ export const SignUp: React.FunctionComponent = () => {
           <Content>
             <Logo source={logo} />
             <Title>Create your account</Title>
-            <Input placeholder="Name" />
-            <Input placeholder="Email" />
-            <Input placeholder="Password" />
-            <Button title="Create account" />
+            <InputControl
+              autoCapitalize="none"
+              autoCorrect={false}
+              control={control}
+              name="name"
+              placeholder="Nome completo"
+            />
+            <InputControl
+              autoCapitalize="none"
+              autoCorrect={false}
+              control={control}
+              name="email"
+              placeholder="Email"
+              keyboardType="email-address"
+            />
+            <InputControl
+              control={control}
+              name="password"
+              placeholder="Senha"
+              autoCorrect={false}
+              secureTextEntry
+            />
+            <Button
+              title="Create account"
+              onPress={handleSubmit(handleSignIn)}
+            />
           </Content>
         </Container>
       </ScrollView>
