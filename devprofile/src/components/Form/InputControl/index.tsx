@@ -1,17 +1,29 @@
 import React from 'react';
-import { Container } from './styles';
-import { Input } from '../Input';
-import { Control, Controller } from 'react-hook-form';
 import { TextInputProps } from 'react-native';
+import {
+  Control,
+  Controller,
+  FieldError,
+  FieldErrorsImpl,
+  Merge,
+} from 'react-hook-form';
+import { Container, Error } from './styles';
+import { Input } from '../Input';
 
-interface InputControlProps extends TextInputProps {
+interface Props extends TextInputProps {
   control: Control;
   name: string;
+  error:
+    | string
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<any>>
+    | undefined;
 }
 
-export const InputControl: React.FunctionComponent<InputControlProps> = ({
+export const InputControl: React.FunctionComponent<Props> = ({
   control,
   name,
+  error,
   ...otherProps
 }) => {
   return (
@@ -23,6 +35,7 @@ export const InputControl: React.FunctionComponent<InputControlProps> = ({
         )}
         name={name}
       />
+      {error && <Error>{error}</Error>}
     </Container>
   );
 };
