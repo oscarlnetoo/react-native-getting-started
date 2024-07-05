@@ -16,9 +16,10 @@ import { Button } from '../../components/Form/Button';
 import logo from '../../assets/logo.png';
 import { useNavigation } from '@react-navigation/native';
 import { InputControl } from '../../components/Form/InputControl';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { AuthContext } from '../../context';
 
 interface ScreenNavigationProps {
   navigate: (screen: string) => void;
@@ -34,6 +35,8 @@ const formSchema = yup.object({
 });
 
 export const SignIn: React.FunctionComponent = () => {
+  const auth = React.useContext(AuthContext);
+
   const { navigate } = useNavigation<ScreenNavigationProps>();
   const {
     control,
@@ -47,7 +50,7 @@ export const SignIn: React.FunctionComponent = () => {
       password: form.password,
     };
 
-    console.log(data);
+    auth.signIn();
   };
 
   return (
