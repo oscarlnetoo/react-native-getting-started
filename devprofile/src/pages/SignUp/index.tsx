@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { Alert, ScrollView } from 'react-native';
 import {
   BackToSignInButton,
   BackToSignInTitle,
@@ -16,6 +16,7 @@ import { InputControl } from '../../components/Form/InputControl';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { api } from '../../services/api';
 
 interface ScreenNavigationProps {
   goBack: () => void;
@@ -39,13 +40,24 @@ export const SignUp: React.FunctionComponent = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(formSchema) });
 
-  const handleSignIn = (form: IFormInputs) => {
+  const handleSignIn = async (form: IFormInputs) => {
     const data = {
       email: form.email,
       password: form.password,
     };
 
-    console.log(data);
+    try {
+      await api.post('users', data);
+      Alert.alert(
+        'Cadastro realizado',
+        'Você já pode fazer login na aplicação.',
+      );
+    } catch (error) {
+      Alert.alert(
+        'Erro no cadastro',
+        'Ocorreu um erro ao fazer o cadastro. Tente novamente.',
+      );
+    }
   };
 
   return (
