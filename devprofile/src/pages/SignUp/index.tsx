@@ -40,8 +40,9 @@ export const SignUp: React.FunctionComponent = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(formSchema) });
 
-  const handleSignIn = async (form: IFormInputs) => {
+  const handleSignUp = async (form: IFormInputs) => {
     const data = {
+      name: form.name,
       email: form.email,
       password: form.password,
     };
@@ -97,7 +98,7 @@ export const SignUp: React.FunctionComponent = () => {
             />
             <Button
               title="Create account"
-              onPress={handleSubmit(handleSignIn)}
+              onPress={handleSubmit(handleSignUp)}
             />
           </Content>
         </Container>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { Alert, ScrollView } from 'react-native';
 import { Input } from '../../components/Form/Input';
 import {
   Container,
@@ -19,7 +19,7 @@ import { InputControl } from '../../components/Form/InputControl';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { AuthContext } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 interface ScreenNavigationProps {
   navigate: (screen: string) => void;
@@ -35,7 +35,7 @@ const formSchema = yup.object({
 });
 
 export const SignIn: React.FunctionComponent = () => {
-  const auth = React.useContext(AuthContext);
+  const auth = useAuth();
   const [loading, setLoading] = React.useState(false);
 
   const { navigate } = useNavigation<ScreenNavigationProps>();
@@ -52,7 +52,7 @@ export const SignIn: React.FunctionComponent = () => {
     };
 
     setLoading(true);
-    auth.signIn();
+    auth.signIn(data);
   };
 
   return (
