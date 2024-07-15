@@ -19,7 +19,7 @@ import { InputControl } from '../../components/Form/InputControl';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { AuthContext } from '../../context';
+import { AuthContext } from '../../context/AuthContext';
 
 interface ScreenNavigationProps {
   navigate: (screen: string) => void;
@@ -36,6 +36,7 @@ const formSchema = yup.object({
 
 export const SignIn: React.FunctionComponent = () => {
   const auth = React.useContext(AuthContext);
+  const [loading, setLoading] = React.useState(false);
 
   const { navigate } = useNavigation<ScreenNavigationProps>();
   const {
@@ -50,6 +51,7 @@ export const SignIn: React.FunctionComponent = () => {
       password: form.password,
     };
 
+    setLoading(true);
     auth.signIn();
   };
 
@@ -80,7 +82,11 @@ export const SignIn: React.FunctionComponent = () => {
               secureTextEntry
               error={errors.password && errors.password.message}
             />
-            <Button title="Sign in" onPress={handleSubmit(handleSignIn)} />
+            <Button
+              title="Sign in"
+              disabled={loading}
+              onPress={handleSubmit(handleSignIn)}
+            />
             <ForgotPasswordButton>
               <ForgotPasswordTitle>Forgot my password</ForgotPasswordTitle>
             </ForgotPasswordButton>

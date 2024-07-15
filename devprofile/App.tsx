@@ -9,7 +9,7 @@ import {
 import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { Routes } from './src/routes';
-import { AuthProvider } from './src/context';
+import { AuthProvider } from './src/context/AuthContext';
 
 const App: React.FunctionComponent = () => {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
