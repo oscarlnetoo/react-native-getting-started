@@ -20,6 +20,7 @@ import { api } from '../../services/api';
 
 interface ScreenNavigationProps {
   goBack: () => void;
+  navigate: (screen: string) => void;
 }
 
 interface IFormInputs {
@@ -27,36 +28,33 @@ interface IFormInputs {
 }
 
 const formSchema = yup.object({
-  name: yup.string().required('Name required.'),
   email: yup.string().email('Invalid email.').required('Email required.'),
-  password: yup.string().required('Password required.'),
 });
 
-export const SignUp: React.FunctionComponent = () => {
-  const { goBack } = useNavigation<ScreenNavigationProps>();
+export const ForgotPassword: React.FunctionComponent = () => {
+  const { goBack, navigate } = useNavigation<ScreenNavigationProps>();
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(formSchema) });
 
-  const handleSignUp = async (form: IFormInputs) => {
+  const handleForgotPassword = async (form: IFormInputs) => {
     const data = {
-      name: form.name,
       email: form.email,
-      password: form.password,
     };
 
     try {
-      await api.post('users', data);
+      await api.post('password/forgot', data);
       Alert.alert(
-        'Registration completed',
-        'You can now login in the application.',
+        'Email sent ',
+        'You will receive an email with instructions to redefine your password.',
       );
+      navigate('ResetPassword');
     } catch (error) {
       Alert.alert(
-        'Registration error',
-        'An error happened while trying to create your user. Try again.',
+        'Error sending the email',
+        'An error happened while sending the email. Try again.',
       );
     }
   };
@@ -70,15 +68,7 @@ export const SignUp: React.FunctionComponent = () => {
         <Container>
           <Content>
             <Logo source={logo} />
-            <Title>Create your account</Title>
-            <InputControl
-              autoCapitalize="none"
-              autoCorrect={false}
-              control={control}
-              name="name"
-              placeholder="Nome completo"
-              error={errors.name && errors.name.message}
-            />
+            <Title>Forgot my password</Title>
             <InputControl
               autoCapitalize="none"
               autoCorrect={false}
@@ -88,18 +78,7 @@ export const SignUp: React.FunctionComponent = () => {
               keyboardType="email-address"
               error={errors.email && errors.email.message}
             />
-            <InputControl
-              control={control}
-              name="password"
-              placeholder="Senha"
-              autoCorrect={false}
-              secureTextEntry
-              error={errors.password && errors.password.message}
-            />
-            <Button
-              title="Create account"
-              onPress={handleSubmit(handleSignUp)}
-            />
+            <Button title="Send" onPress={handleSubmit(handleForgotPassword)} />
           </Content>
         </Container>
       </ScrollView>

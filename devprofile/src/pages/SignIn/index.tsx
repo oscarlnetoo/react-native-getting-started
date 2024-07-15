@@ -30,8 +30,8 @@ interface IFormInputs {
 }
 
 const formSchema = yup.object({
-  email: yup.string().email('Email inválido.').required('Informe o email.'),
-  password: yup.string().required('Informe a senha.'),
+  email: yup.string().email('Invalid email.').required('Email required.'),
+  password: yup.string().required('Password required.'),
 });
 
 export const SignIn: React.FunctionComponent = () => {
@@ -87,7 +87,7 @@ export const SignIn: React.FunctionComponent = () => {
               disabled={loading}
               onPress={handleSubmit(handleSignIn)}
             />
-            <ForgotPasswordButton>
+            <ForgotPasswordButton onPress={() => navigate('ForgotPassword')}>
               <ForgotPasswordTitle>Forgot my password</ForgotPasswordTitle>
             </ForgotPasswordButton>
           </Content>
