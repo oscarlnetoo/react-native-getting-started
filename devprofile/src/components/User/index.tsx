@@ -12,7 +12,7 @@ import {
   UserEmailDetail,
   UserNameDetail,
 } from './styles';
-import { IUser } from '../../../model/user';
+import { IUser } from '../../model/user';
 
 interface UserProps {
   data: IUser;

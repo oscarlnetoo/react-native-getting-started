@@ -10,6 +10,7 @@ import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { Routes } from './src/routes';
 import { AuthProvider } from './src/context/AuthContext';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const App: React.FunctionComponent = () => {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
@@ -19,13 +20,15 @@ const App: React.FunctionComponent = () => {
   }
 
   return (
-    <NavigationContainer>
-      <ThemeProvider theme={theme}>
-        <AuthProvider>
-          <Routes />
-        </AuthProvider>
-      </ThemeProvider>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <ThemeProvider theme={theme}>
+          <AuthProvider>
+            <Routes />
+          </AuthProvider>
+        </ThemeProvider>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 };
 
