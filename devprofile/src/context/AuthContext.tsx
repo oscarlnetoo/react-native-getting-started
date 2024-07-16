@@ -18,6 +18,7 @@ interface IAuthContext {
   user: IUser;
   signIn(credentials: ICredentials): void;
   signOut(): void;
+  updateUser(user: IUser): void;
 }
 
 const tokenData = '@DevProfile:token';
@@ -58,8 +59,18 @@ export const AuthProvider: React.FunctionComponent = ({ children }) => {
     setData({} as IAuthState);
   };
 
+  const updateUser = async (user: IUser) => {
+    await AsyncStorage.setItem(userData, JSON.stringify(user));
+    setData({
+      user,
+      token: data.token,
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, signIn, signOut, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
