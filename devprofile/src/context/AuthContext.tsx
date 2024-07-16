@@ -41,6 +41,8 @@ export const AuthProvider: React.FunctionComponent = ({ children }) => {
 
       await AsyncStorage.setItem(tokenData, token);
       await AsyncStorage.setItem(userData, JSON.stringify(user));
+
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setData({ token, user });
     } catch (error) {
       Alert.alert(
