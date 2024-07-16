@@ -58,6 +58,10 @@ export const Home: React.FunctionComponent = () => {
     );
   };
 
+  const handleUserProfile = () => {
+    navigate('UserProfile');
+  };
+
   const handleUserDetails = (userId: string) => {
     navigate('UserDetails', { userId });
   };
@@ -67,7 +71,7 @@ export const Home: React.FunctionComponent = () => {
       <Header>
         <UserWrapper>
           <UserInfo>
-            <UserAvatarButton onPress={() => {}}>
+            <UserAvatarButton onPress={handleUserProfile}>
               <UserAvatar
                 source={
                   user.avatar_url ? { uri: user.avatar_url } : avatarDefault
